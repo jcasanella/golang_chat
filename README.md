@@ -9,6 +9,14 @@ A rudimentary WebSocket server built using Golang that supports broadcasting mes
 
 ## Installation
 
+### Postgres 
+1. Install Postgres, using docker
+```
+docker pull postgres:15-alpine
+docker run --name postgres -p 5433:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=password -d postgres:15-alpine
+docker exec -it postgres15 createdb --username=root --owner=root go-chat 
+```
+
 ### Server (Golang)
 1. Install Go (if not installed already): [Download Go](https://golang.org/dl/)
 2. Clone this repository:
