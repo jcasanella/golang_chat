@@ -13,3 +13,4 @@ type Repository interface {
   CreateUser(ctx context.Context, user *User) (*User, error)  
 }
 
+type Service interface {}
