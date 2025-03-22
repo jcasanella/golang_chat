@@ -4,6 +4,8 @@ import (
 	"context"
 	"strconv"
 	"time"
+
+	"github.com/jcasanella/golang_chat/util"
 )
 
 type service struct {
@@ -19,7 +21,11 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
   ctx, cancel := context.WithTimeout(c, s.timeout)
   defer cancel()
 
-  // TODO hashpassword
+  hashedPassword, err := util.HashPassword(req.Password)
+  if err != nil {
+    return nil, err
+  }
+
   u := &User{
     Username: req.Username,
     Email: req.Email,
