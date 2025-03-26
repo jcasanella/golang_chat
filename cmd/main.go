@@ -5,6 +5,7 @@ import (
 
 	"github.com/jcasanella/golang_chat/db"
 	"github.com/jcasanella/golang_chat/internal/user"
+	"github.com/jcasanella/golang_chat/router"
 )
 
 func main() {
@@ -16,4 +17,7 @@ func main() {
 	userRep := user.NewRepository(dbConn.GetDB())
 	userService := user.NewService(userRep)
 	userHandler := user.NewHandler(userService)
+
+	router.InitRouter(userHandler)
+	router.Start("0.0.0.0:8080")
 }

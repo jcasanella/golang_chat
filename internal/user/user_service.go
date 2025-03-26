@@ -6,42 +6,61 @@ import (
 	"time"
 
 	"github.com/jcasanella/golang_chat/util"
+
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type service struct {
-  Repository
-  timeout time.Duration
+	Repository
+	timeout time.Duration
 }
 
 func NewService(repository Repository) Service {
-  return &service{ repository, time.Duration(2) * time.Second}
+	return &service{repository, time.Duration(2) * time.Second}
 }
 
 func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUserRes, error) {
-  ctx, cancel := context.WithTimeout(c, s.timeout)
-  defer cancel()
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
 
-  hashedPassword, err := util.HashPassword(req.Password)
-  if err != nil {
-    return nil, err
-  }
+	hashedPassword, err := util.HashPassword(req.Password)
+	if err != nil {
+		return nil, err
+	}
 
-  u := &User{
-    Username: req.Username,
-    Email: req.Email,
-    Password: hashedPassword,
-  }
+	u := &User{
+		Username: req.Username,
+		Email:    req.Email,
+		Password: hashedPassword,
+	}
 
-  r, err := s.Repository.CreateUser(ctx, u)
-  if err != nil {
-    return nil, err
-  }
+	r, err := s.Repository.CreateUser(ctx, u)
+	if err != nil {
+		return nil, err
+	}
 
-  resp := &CreateUserRes{
-    ID: strconv.Itoa(int(r.ID)),
-    Username: r.Username,
-    Email: r.Email,
-  }
+	resp := &CreateUserRes{
+		ID:       strconv.Itoa(int(r.ID)),
+		Username: r.Username,
+		Email:    r.Email,
+	}
 
-  return resp, nil
+	return resp, nil
+}
+
+func (s *service) Login(c context.Context, req *LoginUserReq) (*LoginUserResp, error) {
+	ctx, cancel := context.WithTimeout(c, s.timeout)
+	defer cancel()
+
+	u, err := s.Repository.GetUserByEmail(ctx, req.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	err = util.CheckPassword(req.Password, u.Password)
+	if err != nil {
+		return nil, err
+	}
+
+	return &u, nil
 }

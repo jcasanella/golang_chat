@@ -31,3 +31,7 @@ func (h *Handler) CreateUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, res)
 }
+
+func (h *handler) GetUserByEmail(c *gin.Context) {
+	e
+}
