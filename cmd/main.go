@@ -5,6 +5,7 @@ import (
 
 	"github.com/jcasanella/golang_chat/db"
 	"github.com/jcasanella/golang_chat/internal/user"
+	"github.com/jcasanella/golang_chat/internal/ws"
 	"github.com/jcasanella/golang_chat/router"
 )
 
@@ -18,6 +19,9 @@ func main() {
 	userService := user.NewService(userRep)
 	userHandler := user.NewHandler(userService)
 
-	router.InitRouter(userHandler)
+	hub := ws.NewHub()
+	wsHandler := ws.NewHandler(hub)
+
+	router.InitRouter(userHandler, wsHandler)
 	router.Start("0.0.0.0:8080")
 }
