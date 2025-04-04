@@ -51,9 +51,9 @@ func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUser
 }
 
 type JWTClaims struct {
-  ID        string `json:"string"`
-  Username  string `json:"username"`
-  jwt.RegisteredClaims
+	ID       string `json:"string"`
+	Username string `json:"username"`
+	jwt.RegisteredClaims
 }
 
 func (s *service) Login(c context.Context, req *LoginUserReq) (*LoginUserRes, error) {
@@ -70,19 +70,19 @@ func (s *service) Login(c context.Context, req *LoginUserReq) (*LoginUserRes, er
 		return nil, err
 	}
 
-  token := jwt.NewWithClaims(jwt.SigningMethodHS256, JWTClaims {
-    ID: strconv.Itoa(int(u.ID)),
-    Username: u.Username,
-    RegisteredClaims: jwt.RegisteredClaims {
-      Issuer: strconv.Itoa(int(u.ID)),
-      ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
-    },
-  })
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, JWTClaims{
+		ID:       strconv.Itoa(int(u.ID)),
+		Username: u.Username,
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:    strconv.Itoa(int(u.ID)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
+		},
+	})
 
-  ss, err := token.SignedString([]byte(secretKey))
-  if err != nil {
-    return nil, err
-  }
+	ss, err := token.SignedString([]byte(secretKey))
+	if err != nil {
+		return nil, err
+	}
 
-  return &LoginUserRes{ accessToken: ss, Username: u.Username, ID: strconv.Itoa(int(u.ID))}, nil
+	return &LoginUserRes{accessToken: ss, Username: u.Username, ID: strconv.Itoa(int(u.ID))}, nil
 }
