@@ -59,4 +59,23 @@ func TestCreateUser(t *testing.T) {
 		}
 	})
 
+	var tests = []struct {
+		name     string
+		input    CreateUserReq
+		errorMsg string
+	}{
+		{"An user without Username can not be created", CreateUserReq{Email: "mock@mock.com", Password: "test"}, "User creted without Username"},
+		{"An user without Password can not be created", CreateUserReq{Username: "mock", Email: "mock@mock.com"}, "User created without Password"},
+		{"An user without Email can not be created", CreateUserReq{Username: "mock", Password: "test"}, "User created without Email"},
+	}
+	for _, tt := range tests {
+
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
+			if _, err := s.CreateUser(context.TODO(), &tt.input); err == nil {
+				t.Error(tt.errorMsg)
+			}
+		})
+	}
 }

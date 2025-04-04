@@ -2,6 +2,7 @@ package user
 
 import (
 	"context"
+	"fmt"
 	"strconv"
 	"time"
 
@@ -24,6 +25,18 @@ func NewService(repository Repository) Service {
 func (s *service) CreateUser(c context.Context, req *CreateUserReq) (*CreateUserRes, error) {
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
+
+	if req.Password == "" {
+		return nil, fmt.Errorf("User without password, can not be created")
+	}
+
+	if req.Username == "" {
+		return nil, fmt.Errorf("User without username, can not be created")
+	}
+
+	if req.Email == "" {
+		return nil, fmt.Errorf("User without email, can not be created")
+	}
 
 	hashedPassword, err := util.HashPassword(req.Password)
 	if err != nil {
