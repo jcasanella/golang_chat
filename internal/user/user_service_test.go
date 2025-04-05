@@ -2,9 +2,12 @@ package user
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/jcasanella/golang_chat/util"
 	"golang.org/x/net/context"
 )
 
@@ -24,20 +27,30 @@ func (r *RepositoryStub) CreateUser(ctx context.Context, user *User) (*User, err
 }
 
 func (r *RepositoryStub) GetUserByEmail(ctx context.Context, email string) (*User, error) {
-	if email != "" {
+	if hashedPassword, error := util.HashPassword("test"); error != nil {
+		return nil, error
+	} else {
 		return &User{
 			Username: "testMock",
-			Email:    "test@mock.com",
-			Password: "test",
+			Password: hashedPassword,
+			Email:    email,
 		}, nil
-	} else {
-		return nil, fmt.Errorf("User not present")
 	}
 }
 
-func TestCreateUser(t *testing.T) {
+var s Service
+
+func TestMain(t *testing.M) {
 	r := &RepositoryStub{}
-	s := NewService(r)
+	s = NewService(r)
+
+	log.Print("Initialize Service")
+	exitVal := t.Run()
+
+	os.Exit(exitVal)
+}
+
+func TestCreateUser(t *testing.T) {
 
 	t.Run("Should create a valid user", func(t *testing.T) {
 		t.Parallel()
@@ -77,5 +90,13 @@ func TestCreateUser(t *testing.T) {
 				t.Error(tt.errorMsg)
 			}
 		})
+	}
+}
+
+func TestLogin(t *testing.T) {
+	loginUserReq := &LoginUserReq{Email: "mock@mock.com", Password: "test"}
+	_, err := s.Login(context.TODO(), loginUserReq)
+	if err != nil {
+		t.Errorf("User %v not logger", loginUserReq)
 	}
 }
