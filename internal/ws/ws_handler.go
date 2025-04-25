@@ -75,4 +75,7 @@ func (h *Handler) JoinRoom(c *gin.Context) {
 
 	// Broadcast the message to all clients in the room
 	h.hub.Broadcast <- m
+
+	go cl.writeMessage()
+	cl.readMessage(h.hub)
 }
