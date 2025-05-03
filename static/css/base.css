@@ -1,0 +1,21 @@
+:root {
+    --color-primary: #ff7b54;
+    --color-text-on-primary: #fff;
+    --color-text-on-secondary: #000;
+    --color-button-border: #fff;
+    --color-button-primary-bg: var(--color-text-on-primary);
+    --color-button-primary-text: var(--color-primary);
+    --color-button-secondary-bg: var(--color-primary);
+    --color-button-secondary-text: var(--color-text-on-primary);
+    --font-family: "Inter", sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-family);
+    font-weight: bold;
+  }
+  
+  .body--primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+  }

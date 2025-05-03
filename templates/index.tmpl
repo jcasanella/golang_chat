@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Chat App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/login.css">
+    </head>
+    <body>
+        <h1>
+            {{ .title }}
+        </h1>
+    
+        <div class="login-container">
+            <form>
+                <div>
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" placeholder="Enter your username">
+                </div>
+                <div>
+                    <label for="name">Password:</label>
+                    <input type="password" name="password" placeholder="Enter your password">
+                </div>
+                <input type="submit" value="Submit">    
+            </form>
+        </div>
+    </body>
+  </html>
