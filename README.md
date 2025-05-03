@@ -33,6 +33,74 @@ go mod tidy
 go run main.go
 ```
 
+## API List
+
+### Create User
+
+Creates an user with the `username`, `email` and `password` provided.
+
+* url: localhost:8080/signup
+
+* Body:
+```
+{
+    "username": "jordi",
+    "email": "jordikiter@hotmail.es",
+    "password": "password"
+}
+```
+
+* Sample Response:
+```
+{
+    "id": "1",
+    "username": "jordi",
+    "email": "jordikiter@hotmail.es"
+}
+```
+
+### Create Room
+
+Creates a room with the `id` and `name` provided.
+
+* url: localhost:8080/ws/createRoom
+
+* Body:
+```
+{
+    "id": "1",
+    "name": "goRoom"
+}
+```
+
+* Sample Response:
+```
+{
+    "id": "2",
+    "name": "typescriptRoom"
+}
+```
+
+### Get Rooms
+
+Return all the existing rooms
+
+* url: localhost:8080/ws/getRooms
+
+* Sample Response:
+```
+[
+    {
+        "id": "1",
+        "name": "goRoom"
+    },
+    {
+        "id": "2",
+        "name": "typescriptRoom"
+    }
+]
+```
+
 ### Client Node JS
 1. Install NodeJS (if not installed already): [Download NodeJs](https://nodejs.org/)
 2. Install dependencies
