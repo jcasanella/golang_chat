@@ -13,4 +13,6 @@ migrations-up:
 migrations-down:
 	migrate -path db/migrations -database "postgresql://root:password@localhost:5433/go-chat?sslmode=disable" -verbose down
 
-.PHONY: postgresinit createdb dropdb migrations-up migrations-down
+all: createdb migrations-up
+
+.PHONY: postgresinit createdb dropdb migrations-up migrations-down all

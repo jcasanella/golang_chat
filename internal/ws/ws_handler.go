@@ -53,7 +53,7 @@ func (h *Handler) JoinRoom(c *gin.Context) {
 	}
 
 	roomID := c.Param("roomID")
-	clientID := c.Query("clientID")
+	clientID := c.Query("userID")
 	username := c.Query("username")
 
 	cl := &Client{
