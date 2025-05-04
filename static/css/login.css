@@ -7,3 +7,42 @@
   justify-content: center;
   height: 100vh;
 }
+
+.login-container-header h2 {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+
+.login-icon {
+  color:#ff7b54;
+  /* color: var(--color-icon-primary-bg); */
+}
+
+.login-container-form-username input[type="text"] {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
+  background-color: var(--color-secondary);
+}
+
+.login-container-form-password input[type="password"] {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: none;
+  background-color: var(--color-secondary);
+}
+
+.login-container-form-button button {
+  width: 10em;
+  border-radius: 10px;
+  border: none;
+  padding: 0.75em;
+  background-color: var(--color-button-primary-bg);
+  color: var(--color-button-primary-text);
+}
+
+.login-container-form-button button:hover {
+  cursor: pointer;
+}
+
