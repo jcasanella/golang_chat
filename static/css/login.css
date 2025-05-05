@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  /* width: 70vw; */
 }
 
 .login-container-header h2 {
@@ -15,8 +16,15 @@
 }
 
 .login-icon {
-  color:#ff7b54;
+  color: white;
+  background-color: #ff7b54;
   /* color: var(--color-icon-primary-bg); */
+}
+
+.login-container-form-username {
+  display: flex;
+  align-items: center;
+  width: fit-content; /* or set a fixed width */
 }
 
 .login-container-form-username input[type="text"] {
