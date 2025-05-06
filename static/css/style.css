@@ -4,6 +4,7 @@
     --base-color: white;
     --text-color: #2E2B41;
     --input-color: #F3F0FF;
+    --incorrect-color: #f06272;
 }
 
 * {
@@ -97,6 +98,57 @@ form input:focus {
     border-color: var(--text-color);
 }
 
+form input::placeholder {
+    color: var(--text-color);
+    opacity: 1;
+}
+
 div:has(input:focus) > label {
     background-color: var(--text-color);
+}
+
+form button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 100px;
+    padding: 0.85em 4em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    font: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+form button:hover {
+    background-color: var(--text-color);
+}
+
+form button:focus {
+    outline: none;
+    background-color: var(--text-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+@media(max-width: 1100px) {
+    .wrapper {
+        width: min(600px, 100%);
+        border-radius: 0;
+    }
+}
+
+form .incorrect label{
+    background-color: var(--incorrect-color);
+}
+
+form .incorrect input{
+    border-color: var(--incorrect-color);
 }
