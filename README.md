@@ -1,4 +1,4 @@
-# WebSocket Server in Golang
+# Chat App - WIP
 
 A rudimentary WebSocket server built using Golang that supports broadcasting messages to connected clients. The client implementation is done using Node.js.
 
