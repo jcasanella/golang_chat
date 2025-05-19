@@ -1,10 +1,11 @@
-const formSignUpElement = document.querySelector('.form #signup');
-const formLoginElement = document.querySelector('.form #login');
+const formSignUpElement = document.querySelector('.form.signup');
+// const formLoginElement = document.querySelector('.form #login');
 
 const buttonSignUpElement = formSignUpElement.querySelector('button');
-const buttonLoginElement = formLoginElement.querySelector('button');
+// const buttonLoginElement = formLoginElement.querySelector('button');
 
 buttonSignUpElement.addEventListener('click',async (_event) =>{
+    event.preventDefault(); // Prevent form from submitting and reloading the page
     const resp = await fetch('/api/signup', {
         method: 'POST',
         body: JSON.stringify({
@@ -25,5 +26,7 @@ buttonSignUpElement.addEventListener('click',async (_event) =>{
     } else {
         const data = await resp.json();
         console.log("Success:", data);
+
+        window.location.href = '/room';
     }
 });

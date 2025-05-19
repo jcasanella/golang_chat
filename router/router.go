@@ -26,7 +26,12 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 			"title": "Chat"})
 	})
 
-	r.POST("/signup", userHandler.CreateUser)
+	r.GET("/room", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "room.tmpl", gin.H{
+			"title": "Chat"})
+	})
+
+	r.POST("/api/signup", userHandler.CreateUser)
 	r.POST("/login", userHandler.Login)
 	r.GET("/logout", userHandler.Logout)
 

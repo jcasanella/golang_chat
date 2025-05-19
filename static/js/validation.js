@@ -30,7 +30,7 @@ function getLoginFormErrors(username, password) {
         userNameInput.parentElement.classList.add('incorrect');
     }
 
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@._#$!%*?&])[A-Za-z\d@._#$!%*?&]{8,15}$/;
     if (!regex.test(password)) {
         errors.push('Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character');
         passwordInput.parentElement.classList.add('incorrect');
@@ -57,7 +57,7 @@ function getSignupFormErrors(username, email, password, repeatPassword) {
         emailInput.parentElement.classList.add('incorrect');
     }
 
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@._#$!%*?&])[A-Za-z\d@._#$!%*?&]{8,15}$/;
     if (!regex.test(password)) {
         errors.push('Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character');
         passwordInput.parentElement.classList.add('incorrect');
