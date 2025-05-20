@@ -16,9 +16,10 @@ type CreateUserReq struct {
 }
 
 type CreateUserRes struct {
-	ID       string `json:"id" db:"id"`
-	Username string `json:"username" db:"username"`
-	Email    string `json:"email" db:"email"`
+	accessToken string
+	ID          string `json:"id" db:"id"`
+	Username    string `json:"username" db:"username"`
+	Email       string `json:"email" db:"email"`
 }
 
 type LoginUserReq struct {

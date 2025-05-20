@@ -29,7 +29,14 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		return
 	}
 
-	//c.SetCookie("jwt",  res.accessToken, 3600, "/", "localhost", false, true)
+	c.SetCookie("jwt", res.accessToken, 3600, "/", "localhost", false, true)
+
+	res = &CreateUserRes{
+		ID:       res.ID,
+		Username: res.Username,
+		Email:    res.Email,
+	}
+
 	c.JSON(http.StatusOK, res)
 }
 
