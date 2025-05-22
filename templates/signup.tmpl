@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat App - Sign Up</title>
         <link rel="stylesheet" href="/static/css/style.css">
-        <script type="text/javascript" src="/static/js/validation.js" defer></script>
+        <script type="module" src="/static/js/validation.js" defer></script>
+        <script type="module" src="/static/js/actions.js" defer></script>
     </head>
     <body>      
         <div class="wrapper">
@@ -36,11 +37,9 @@
                     </label>
                     <input type="password" name="repeat-password" id="repeat-password-input" placeholder="Repeat Password" required>
                 </div> 
-                <button type="submit">SignUp</button>
+                <button>SignUp</button>
             </form>
             <p>Already have an account? <a href="/">Login</a></p>
         </div>
-
-        <script type="text/javascript" src="/static/js/actions.js" defer></script>
     </body>
 </html>

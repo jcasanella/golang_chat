@@ -154,5 +154,7 @@ form .incorrect input{
 }
 
 #error-message {
-    color: var(--incorrect-color)
+    color: var(--incorrect-color);
+    font-size: 0.8rem;
+    font-weight: 500;
 }
