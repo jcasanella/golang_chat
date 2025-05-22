@@ -7,66 +7,62 @@ const repeatPasswordInput = document.getElementById('repeat-password-input');
 
 const errorMessageElement = document.getElementById('error-message');
 
-formElement.addEventListener('submit', (event) => {
-    let errors = [];
-    
-    if (emailInput) {
-        errors = getSignupFormErrors(userNameInput.value, emailInput.value, passwordInput.value, repeatPasswordInput.value);
-    } else {
-        errors = getLoginFormErrors(userNameInput.value, passwordInput.value);
+
+function validateUsername(username, inputElement) {
+    if (username.length < 3) {
+        inputElement.parentElement.classList.add('incorrect');
+        return [false, 'Username must be at least 3 characters long'];
     }
-    
-    if (errors.length > 0) {
-        event.preventDefault();
-        errorMessageElement.innerHTML = errors.join('. ');
+
+    return [true, undefined];
+}
+
+function validatePassword(password, inputElement) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@._#$!%*?&])[A-Za-z\d@._#$!%*?&]{8,15}$/;
+    if (!regex.test(password)) {
+        inputElement.parentElement.classList.add('incorrect');
+        return [false, 'Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character'];
     }
-});
+
+    return [true, undefined];
+}
+
+function validateEmail(email, inputElement) {
+    const emailRegex = /^(?=.{5,})[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        inputElement.parentElement.classList.add('incorrect');
+        return [false, 'Email is not valid'];
+    }
+
+    return [true, undefined];
+}
 
 function getLoginFormErrors(username, password) {
     const errors = [];
 
-    if (username.length < 3) {
-        errors.push('Username must be at least 3 characters long');
-        userNameInput.parentElement.classList.add('incorrect');
-    }
+    const [isUsernameValid, usernameError] = validateUsername(username, userNameInput);
+    if (!isUsernameValid) errors.push(usernameError);
+        
+    const [isPasswordValid, passwordError] = validatePassword(password, passwordInput);
+    if (!isPasswordValid) errors.push(passwordError);
 
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@._#$!%*?&])[A-Za-z\d@._#$!%*?&]{8,15}$/;
-    if (!regex.test(password)) {
-        errors.push('Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character');
-        passwordInput.parentElement.classList.add('incorrect');
-    }
-    
     return errors;
 }
 
-function getSignupFormErrors(username, email, password, repeatPassword) {
+export function validateSignupForm(username, email, password, repeatPassword) {
     const errors = [];
 
-    if (username.length < 3) {
-        errors.push('Username must be at least 3 characters long');
-        userNameInput.parentElement.classList.add('incorrect');
-    }
+    const [isUsernameValid, usernameError] = validateUsername(username, userNameInput);
+    if (!isUsernameValid) errors.push(usernameError);
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        errors.push('Email is not valid');
-        emailInput.parentElement.classList.add('incorrect');
-    }
-    if (email.length < 5) {
-        errors.push('Email must be at least 5 characters long');
-        emailInput.parentElement.classList.add('incorrect');
-    }
+    const [isEmailValid, emailError] = validateEmail(email, emailInput);
+    if (!isEmailValid) errors.push(emailError);
 
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@._#$!%*?&])[A-Za-z\d@._#$!%*?&]{8,15}$/;
-    if (!regex.test(password)) {
-        errors.push('Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character');
-        passwordInput.parentElement.classList.add('incorrect');
-    }
+    const [isPasswordValid, passwordError] = validatePassword(password, passwordInput);
+    if (!isPasswordValid) errors.push(passwordError);
 
-    if (!regex.test(repeatPassword)) {
-        errors.push('Password must be 8-15 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character');
-        repeatPasswordInput.parentElement.classList.add('incorrect');
-    }
+    const [isRepeatPasswordValid, repeatPasswordError] = validatePassword(repeatPassword, repeatPasswordInput);
+    if (!isRepeatPasswordValid) errors.push(repeatPasswordError);
 
     if (password !== repeatPassword) {
         errors.push('Passwords do not match');

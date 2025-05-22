@@ -37,7 +37,7 @@ func (h *Handler) CreateUser(c *gin.Context) {
 		Email:    res.Email,
 	}
 
-	c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusCreated, res)
 }
 
 func (h *Handler) Login(c *gin.Context) {
