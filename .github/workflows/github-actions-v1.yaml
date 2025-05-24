@@ -29,14 +29,12 @@ jobs:
       contents: read
       pull-requests: write
     steps:
+      # This step checks out a copy of your repository.
       - uses: actions/checkout@v3
-      - uses: gvasilei/AutoReviewer@0.5.1
-        env:
-          NODE_OPTIONS: '--experimental-fetch'
+      # This step references the directory that contains the action.
+      - uses: sshnaidm/gpt-code-review-action@v2.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_api_key: ${{ secrets.OPENAI_API_KEY2 }}
-          exclude_files: '*.json, *.md, *.yml' # optionally exclude files based on a wildcard expression. 
+          openai-key: ${{ secrets.OPENAI_API_KEY }}
 
 
       # - name: Build application
