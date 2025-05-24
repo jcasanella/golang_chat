@@ -1,6 +1,6 @@
 const buttonElement = document.querySelector('button');
 
-buttonElement.addEventListener('click',async (_event) =>{
+buttonElement.addEventListener('click',async (event) =>{
     event.preventDefault(); // Prevent form from submitting and reloading the page
     
     const resp = await fetch('/api/logout');
