@@ -34,7 +34,7 @@ jobs:
         env:
           NODE_OPTIONS: '--experimental-fetch'
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           exclude_files: '*.json, *.md, *.yml' # optionally exclude files based on a wildcard expression. 
 
