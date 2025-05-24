@@ -6,7 +6,7 @@ const formSignUpElement = document.querySelector('.form.signup');
 const buttonSignUpElement = formSignUpElement.querySelector('button');
 // const buttonLoginElement = formLoginElement.querySelector('button');
 
-buttonSignUpElement.addEventListener('click',async (_event) =>{
+buttonSignUpElement.addEventListener('click',async (event) =>{
     event.preventDefault(); // Prevent form from submitting and reloading the page
     
     // Get all inputs and error element
