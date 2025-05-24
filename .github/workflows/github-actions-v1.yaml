@@ -24,20 +24,18 @@ jobs:
     
   code-review:
     runs-on: ubuntu-latest
-    # if: ${{ contains( github.event.label.name, 'AutoReview') }}
     permissions:
       contents: read
       pull-requests: write
     steps:
-      # This step checks out a copy of your repository.
       - uses: actions/checkout@v3
-      # This step references the directory that contains the action.
-      - uses: sshnaidm/gpt-code-review-action@v2.0
+      - uses: gvasilei/AutoReviewer@0.5.1
+        env:
+          NODE_OPTIONS: '--experimental-fetch'
         with:
-          openai-key: ${{ secrets.OPENAI_API_KEY }}
-          github-token: ${{ secrets.GH_TOKEN }}
-
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          exclude_files: '*.json'   # optionally exclude files
       # - name: Build application
       #   run: go build -o chatapp ./cmd/chatapp
 
