@@ -3,8 +3,7 @@ on:
   push:
     branches: [$default_branch]
   pull_request:
-    branches:
-      - main
+    types: [labeled]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,6 +24,7 @@ jobs:
     
   code-review:
     runs-on: ubuntu-latest
+    if: ${{ contains( github.event.label.name, 'AutoReview') }}
     permissions:
       contents: read
       pull-requests: write
@@ -34,7 +34,7 @@ jobs:
         env:
           NODE_OPTIONS: '--experimental-fetch'
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           exclude_files: '*.json, *.md, *.yml' # optionally exclude files based on a wildcard expression. 
 
