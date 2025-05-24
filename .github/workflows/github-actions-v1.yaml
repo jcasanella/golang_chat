@@ -24,7 +24,7 @@ jobs:
     
   code-review:
     runs-on: ubuntu-latest
-    if: ${{ contains( github.event.label.name, 'AutoReview') }}
+    # if: ${{ contains( github.event.label.name, 'AutoReview') }}
     permissions:
       contents: read
       pull-requests: write
