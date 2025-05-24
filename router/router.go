@@ -16,6 +16,7 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 	r.Static("/static", "./static")
 	r.LoadHTMLGlob("templates/*")
 
+	// Middleware to set the Content-Type header for HTML responses
 	r.GET("/", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"title": "Chat"})
@@ -31,10 +32,12 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 			"title": "Chat"})
 	})
 
+	// API routes
 	r.POST("/api/signup", userHandler.CreateUser)
 	r.POST("/login", userHandler.Login)
-	r.GET("/logout", userHandler.Logout)
+	r.GET("/api/logout", userHandler.Logout)
 
+	// WebSocket routes
 	r.POST("/ws/createRoom", wsHandler.CreateRoom)
 	r.GET("/ws/joinRoom/:roomID", wsHandler.JoinRoom)
 	r.GET("/ws/getRooms", wsHandler.GetRooms)
