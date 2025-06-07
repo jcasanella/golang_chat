@@ -50,16 +50,17 @@ func (h *Handler) Login(c *gin.Context) {
 	res, err := h.Service.Login(c.Request.Context(), &user)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	} else {
+		c.SetCookie("jwt", res.accessToken, 3600, "/", "localhost", false, true)
+
+		res = &LoginUserRes{
+			ID:       res.ID,
+			Username: res.Username,
+		}
+
+		c.JSON(http.StatusOK, res)
 	}
 
-	c.SetCookie("jwt", res.accessToken, 3600, "/", "localhost", false, true)
-
-	res = &LoginUserRes{
-		ID:       res.ID,
-		Username: res.Username,
-	}
-
-	c.JSON(http.StatusOK, res)
 }
 
 func (h *Handler) Logout(c *gin.Context) {
