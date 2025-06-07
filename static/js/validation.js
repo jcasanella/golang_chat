@@ -1,13 +1,3 @@
-const formElement = document.getElementById('form');
-
-const userNameInput = document.getElementById('username-input');
-const emailInput = document.getElementById('email-input');
-const passwordInput = document.getElementById('password-input');
-const repeatPasswordInput = document.getElementById('repeat-password-input');
-
-const errorMessageElement = document.getElementById('error-message');
-
-
 function validateUsername(username, inputElement) {
     if (username.length < 3) {
         inputElement.parentElement.classList.add('incorrect');
@@ -37,12 +27,14 @@ function validateEmail(email, inputElement) {
     return [true, undefined];
 }
 
-function getLoginFormErrors(username, password) {
+export function validateLoginForm(username, password) {
     const errors = [];
 
+    const userNameInput = document.getElementById('username-input');
     const [isUsernameValid, usernameError] = validateUsername(username, userNameInput);
     if (!isUsernameValid) errors.push(usernameError);
         
+    const passwordInput = document.getElementById('password-input');
     const [isPasswordValid, passwordError] = validatePassword(password, passwordInput);
     if (!isPasswordValid) errors.push(passwordError);
 
@@ -52,18 +44,19 @@ function getLoginFormErrors(username, password) {
 export function validateSignupForm(username, email, password, repeatPassword) {
     const errors = [];
 
+    const userNameInput = document.getElementById('username-input');
     const [isUsernameValid, usernameError] = validateUsername(username, userNameInput);
     if (!isUsernameValid) errors.push(usernameError);
 
+    const emailInput = document.getElementById('email-input');
     const [isEmailValid, emailError] = validateEmail(email, emailInput);
     if (!isEmailValid) errors.push(emailError);
 
+    const passwordInput = document.getElementById('password-input');
     const [isPasswordValid, passwordError] = validatePassword(password, passwordInput);
     if (!isPasswordValid) errors.push(passwordError);
 
-    const [isRepeatPasswordValid, repeatPasswordError] = validatePassword(repeatPassword, repeatPasswordInput);
-    if (!isRepeatPasswordValid) errors.push(repeatPasswordError);
-
+    const repeatPasswordInput = document.getElementById('repeat-password-input');
     if (password !== repeatPassword) {
         errors.push('Passwords do not match');
         passwordInput.parentElement.classList.add('incorrect');
@@ -73,8 +66,22 @@ export function validateSignupForm(username, email, password, repeatPassword) {
     return errors;
 }
 
-const allInputs = [userNameInput, emailInput, passwordInput, repeatPasswordInput].filter(Boolean);
+const formLoginElement = document.querySelector('.form.login');
+const allInputs = [];
+if (formLoginElement) {
+    allInputs.push(document.getElementById('username-input'));
+    allInputs.push(document.getElementById('password-input'));
+} else {
+    allInputs.push(document.getElementById('username-input'));
+    allInputs.push(document.getElementById('email-input'));
+    allInputs.push(document.getElementById('password-input'));
+    allInputs.push(document.getElementById('repeat-password-input'));
+}
+
+const errorMessageElement = document.getElementById('error-message');
+
 allInputs.forEach((input) => {
+    if (!input) return; // Skip if input is not found
     input.addEventListener('input', () => {
         if (input.parentElement.classList.contains('incorrect')) {
             input.parentElement.classList.remove('incorrect');

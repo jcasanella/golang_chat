@@ -26,14 +26,14 @@ func (r *RepositoryStub) CreateUser(ctx context.Context, user *User) (*User, err
 	}
 }
 
-func (r *RepositoryStub) GetUserByEmail(ctx context.Context, email string) (*User, error) {
+func (r *RepositoryStub) GetUserByUserName(ctx context.Context, userName string) (*User, error) {
 	if hashedPassword, error := util.HashPassword("test"); error != nil {
 		return nil, error
 	} else {
 		return &User{
-			Username: "testMock",
+			Username: userName,
 			Password: hashedPassword,
-			Email:    email,
+			Email:    "test@email.com",
 		}, nil
 	}
 }
@@ -94,7 +94,7 @@ func TestCreateUser(t *testing.T) {
 }
 
 func TestLogin(t *testing.T) {
-	loginUserReq := &LoginUserReq{Email: "mock@mock.com", Password: "test"}
+	loginUserReq := &LoginUserReq{Username: "testUser", Password: "test"}
 	_, err := s.Login(context.TODO(), loginUserReq)
 	if err != nil {
 		t.Errorf("User %v not logger", loginUserReq)

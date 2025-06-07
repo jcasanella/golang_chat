@@ -34,7 +34,7 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 
 	// API routes
 	r.POST("/api/signup", userHandler.CreateUser)
-	r.POST("/login", userHandler.Login)
+	r.POST("/api/login", userHandler.Login)
 	r.GET("/api/logout", userHandler.Logout)
 
 	// WebSocket routes

@@ -23,7 +23,7 @@ type CreateUserRes struct {
 }
 
 type LoginUserReq struct {
-	Email    string `json:"email" db:"email"`
+	Username string `json:"username" db:"username"`
 	Password string `json:"password" db:"password"`
 }
 
@@ -35,7 +35,7 @@ type LoginUserRes struct {
 
 type Repository interface {
 	CreateUser(ctx context.Context, user *User) (*User, error)
-	GetUserByEmail(ctx context.Context, email string) (*User, error)
+	GetUserByUserName(ctx context.Context, userName string) (*User, error)
 }
 
 type Service interface {
