@@ -26,7 +26,7 @@ func (r *RepositoryStub) CreateUser(ctx context.Context, user *User) (*User, err
 	}
 }
 
-func (r *RepositoryStub) GetUserByUserName(ctx context.Context, userName string) (*User, error) {
+func (r *RepositoryStub) GetUserByUsername(ctx context.Context, userName string) (*User, error) {
 	if hashedPassword, error := util.HashPassword("test"); error != nil {
 		return nil, error
 	} else {

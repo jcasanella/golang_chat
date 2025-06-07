@@ -34,7 +34,7 @@ func (r *repository) CreateUser(ctx context.Context, user *User) (*User, error) 
 	return user, nil
 }
 
-func (r *repository) GetUserByUserName(ctx context.Context, userName string) (*User, error) {
+func (r *repository) GetUserByUsername(ctx context.Context, userName string) (*User, error) {
 	u := User{}
 
 	query := "SELECT id, email, username, password FROM users WHERE username = $1"

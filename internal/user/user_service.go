@@ -92,7 +92,7 @@ func (s *service) Login(c context.Context, req *LoginUserReq) (*LoginUserRes, er
 	ctx, cancel := context.WithTimeout(c, s.timeout)
 	defer cancel()
 
-	u, err := s.Repository.GetUserByUserName(ctx, req.Username)
+	u, err := s.Repository.GetUserByUsername(ctx, req.Username)
 	if err != nil {
 		return nil, err
 	}
