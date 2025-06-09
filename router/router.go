@@ -28,6 +28,11 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 	})
 
 	r.GET("/room", func(ctx *gin.Context) {
+		_, err := ctx.Cookie("jwt")
+		if err != nil {
+			ctx.Redirect(http.StatusFound, "/")
+			return
+		}
 		ctx.HTML(http.StatusOK, "room.tmpl", gin.H{
 			"title": "Chat"})
 	})
