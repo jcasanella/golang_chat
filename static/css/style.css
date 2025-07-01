@@ -40,6 +40,56 @@ body {
     justify-content: center;
 }
 
+.wrapper-chat-room {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    height: 99vh;
+}
+
+.wrapper-chat {
+    background-color: var(--base-color);
+    width: max(80%, 600px);
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper-rooms {
+    background-color: var(--base-color);
+    width: max(20%, 300px);
+    margin-left: 10px;
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.rooms-nav {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.rooms-nav > ul {
+  display: flex;
+  list-style: none; /* Removes bullets */
+  padding: 0;       /* Removes default padding */
+  margin: 0;        /* Removes default margin */
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.rooms-nav > a {
+  text-decoration: none; /* Remove underline */
+  cursor: pointer; /* Change cursor */
+}
+
 .wrapper h1 {
     font-size: 3rem;
     font-weight: 900;

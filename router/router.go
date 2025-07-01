@@ -37,10 +37,15 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 			"title": "Chat"})
 	})
 
+	r.GET("/logout", func(ctx *gin.Context) {
+		ctx.SetCookie("jwt", "", -1, "", "", false, true)
+		ctx.Redirect(http.StatusFound, "/")
+	})
+
 	// API routes
 	r.POST("/api/signup", userHandler.CreateUser)
 	r.POST("/api/login", userHandler.Login)
-	r.GET("/api/logout", userHandler.Logout)
+	r.POST("/api/logout", userHandler.Logout)
 
 	// WebSocket routes
 	r.POST("/ws/createRoom", wsHandler.CreateRoom)

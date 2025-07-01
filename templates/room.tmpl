@@ -7,10 +7,23 @@
         <link rel="stylesheet" href="/static/css/style.css">
         <script type="module" src="/static/js/room-actions.js" defer></script>
     </head>
-    <body>      
-        <div class="wrapper">
-            <h1>Rooms</h1>
-            <button>Logout</button>
+    <body>   
+        <div class="wrapper-chat-room">   
+            <div class="wrapper-chat">
+                <h1>Rooms</h1>
+                <button>Logout</button>
+            </div>
+            <div class="wrapper-rooms">
+                <header>
+                    <h2>Available Rooms</h2>
+                </header>
+                <nav class="rooms-nav">
+                    <ul class="rooms-buttons">
+                        <li><a href="">Create Room</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </nav>    
+            </div>
         </div>
     </body>
 </html>
