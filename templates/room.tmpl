@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat App - Rooms</title>
         <link rel="stylesheet" href="/static/css/style.css">
-        <script type="module" src="/static/js/room-actions.js" defer></script>
+        <script type="module" src="/static/js/dialog.js" defer></script>
     </head>
     <body>   
         <div class="wrapper-chat-room">   
@@ -19,11 +19,22 @@
                 </header>
                 <nav class="rooms-nav">
                     <ul class="rooms-buttons">
-                        <li><a href="">Create Room</a></li>
+                        <li><a href="" id="create-room">Create Room</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </nav>    
             </div>
         </div>
+
+        <dialog id="myDialog">
+            <h3 class="dialog-header">Confirm Action</h3>
+            <div class="dialog-content">
+                <p>Are you sure you want to proceed with this action?</p>
+            </div>
+            <div class="dialog-buttons">
+                <button class="btn btn-cancel">Cancel</button>
+                <button class="btn btn-ok">OK</button>
+            </div>
+        </dialog>
     </body>
 </html>
