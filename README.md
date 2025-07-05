@@ -1,11 +1,30 @@
 # Chat App - WIP
 
-A rudimentary WebSocket server built using Golang that supports broadcasting messages to connected clients. The client implementation is done using Node.js.
+## RoadMap
+
+[Project Planning](https://github.com/users/jcasanella/projects/4/views/1)
+
+## Introduction
+
+A simple real-time chat application built with **Go** (Golang) for the backend, **HTML/CSS** for the frontend, and **JavaScript** for client-side interactivity. The app supports user authentication, room creation, and real-time messaging using WebSockets.
 
 ## Features
-- Accepts WebSocket connections
-- Supports broadcasting messages to all connected clients
-- Simple implementation for easy understanding and extension
+
+- User registration and login
+- JWT-based authentication
+- Create and join chat rooms
+- Real-time messaging with WebSockets
+- Responsive UI with custom CSS
+- Dialogs and client-side validation with JavaScript
+
+## Getting Started
+
+### Prerequisites
+
+- [Go](https://golang.org/dl/) (v1.18+ recommended)
+- [Node.js](https://nodejs.org/) (for optional client testing)
+- [Docker](https://www.docker.com/) (for running Postgres)
+- [pnpm](https://pnpm.io/) (optional, for Node.js client)
 
 ## Installation
 
