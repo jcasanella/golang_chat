@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat App - Rooms</title>
-        <link rel="stylesheet" href="/static/css/style.css">
-        <script type="module" src="/static/js/dialog.js" defer></script>
+        <link rel="stylesheet" href="/static/css/room-style.css">
+        <script type="module" src="/static/js/room-actions.js" defer></script>
     </head>
     <body>   
         <div class="wrapper-chat-room">   
@@ -20,14 +20,7 @@
                 <div class="room-actions">
                     <button class="create-room-btn">+ Create New Room</button>
                 </div>
-                <!-- List of rooms 
-                <nav class="rooms-nav">
-                    <ul class="rooms-buttons">
-                        <li><a href="" id="create-room">Create Room</a></li>
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
-                </nav>    
-                -->
+
                 <div class="rooms-list">
                     <div class="room-item active">
                         <div class="room-name">💬 General Chat</div>
@@ -75,15 +68,17 @@
             </div>
         </div>
 
-        <dialog id="myDialog">
-            <h3 class="dialog-header">Confirm Action</h3>
-            <div class="dialog-content">
-                <p>Are you sure you want to proceed with this action?</p>
-            </div>
-            <div class="dialog-buttons">
-                <button class="btn btn-cancel">Cancel</button>
-                <button class="btn btn-ok">OK</button>
-            </div>
-        </dialog>
+        <div class="wrapper-dialog">
+            <dialog id="dialog-create-room">
+                <h3 class="dialog-header">Confirm Action</h3>
+                <div class="dialog-content">
+                    <p>Are you sure you want to proceed with this action?</p>
+                </div>
+                <div class="dialog-buttons">
+                    <button class="btn btn-cancel">Cancel</button>
+                    <button class="btn btn-ok">OK</button>
+                </div>
+            </dialog>
+        </div>
     </body>
 </html>

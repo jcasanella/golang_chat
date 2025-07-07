@@ -1,19 +1,27 @@
-const buttonElement = document.querySelector('button');
+const logoutBtn = document.querySelector('.logout-btn');
+logoutBtn.addEventListener('click', async (event) => {
+    window.location.href = '/logout';
+});
 
-buttonElement.addEventListener('click',async (event) =>{
-    event.preventDefault(); // Prevent form from submitting and reloading the page
-    
-    const resp = await fetch('/api/logout');
-    if (!resp.ok) {
-        // const errorMessageElement = formSignUpElement.querySelector('#error-message');
-        // errorMessageElement.innerHTML = 'Error: ' + resp.statusText;
-        // errorMessageElement.classList.remove('hidden');
-        // errorMessageElement.classList.add('error-message');
-        console.log("Error:", resp.statusText);
-    } else {
-        const data = await resp.json();
-        console.log("Success:", data);
+const createRoomBtn = document.querySelector('.create-room-btn');
+createRoomBtn.addEventListener('click', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+    const dialog = document.getElementById('dialog-create-room');
+    dialog.showModal(); 
+});
 
-        window.location.href = '/';
-    }
+const roomCreationOkBtn = document.querySelector(".btn.btn-ok");
+roomCreationOkBtn.addEventListener("click", async (event) => {
+    event.preventDefault(); // Prevent default form submission
+    const dialog = document.getElementById('dialog-create-room');
+    dialog.close();
+    // Here you can add the logic to create a room, e.g., sending a request to the server
+    alert('Room creation confirmed!');
+});
+
+const roomCreationCancelBtn = document.querySelector(".btn.btn-cancel");
+roomCreationCancelBtn.addEventListener("click", async (event) => {
+    event.preventDefault(); // Prevent default form submission
+    const dialog = document.getElementById('dialog-create-room');
+    dialog.close();
 });
