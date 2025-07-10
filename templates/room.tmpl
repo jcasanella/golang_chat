@@ -71,9 +71,17 @@
         <div class="wrapper-dialog">
             <dialog id="dialog-create-room">
                 <h3 class="dialog-header">Confirm Action</h3>
-                <div class="dialog-content">
-                    <p>Are you sure you want to proceed with this action?</p>
-                </div>
+                <form method="dialog" class="dialog-content">
+                    <div class="input-group">
+                        <label for="room-name">Room Name</label>
+                        <input id="room-name" name="room-name" type="text" required placeholder="Enter room name" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="room-desc">Description</label>
+                        <input id="room-desc" name="room-desc" type="text" placeholder="Enter description (optional)" />
+                    </div>
+                </form>
                 <div class="dialog-buttons">
                     <button class="btn btn-cancel">Cancel</button>
                     <button class="btn btn-ok">OK</button>

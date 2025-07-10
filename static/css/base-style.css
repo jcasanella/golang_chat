@@ -5,6 +5,7 @@
     --text-color: #2E2B41;
     --input-color: #F3F0FF;
     --incorrect-color: #f06272;
+    --base-text-color: white;
 }
 
 * {

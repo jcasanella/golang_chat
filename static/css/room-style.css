@@ -30,7 +30,7 @@
 
 .rooms-header {
     background: linear-gradient(135deg, #059669, #10b981);
-    color: white;
+    color: var(--base-text-color);
     padding: 20px;
     text-align: center;
 }
@@ -42,14 +42,14 @@
 
 .room-actions {
     padding: 15px;
-    background: white;
+    background: var(--base-color);
     border-bottom: 1px solid #e5e7eb;
 }
 
 .create-room-btn {
     width: 100%;
     background: linear-gradient(135deg, #059669, #10b981);
-    color: white;
+    color: var(--base-text-color);
     border: none;
     padding: 12px;
     border-radius: 12px;
@@ -73,7 +73,7 @@
 .room-item {
     padding: 15px;
     margin: 5px 0;
-    background: white;
+    background: var(--base-color);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -89,10 +89,9 @@
 
 .room-item.active {
     background: linear-gradient(135deg, #ede9fe, #f3e8ff);
-    border-color: #7c3aed;
+    border-color: var(--accent-color);
     transform: translateX(5px);
 }
-
 .room-name {
     font-weight: 600;
     color: #374151;
@@ -108,7 +107,7 @@
 
 .online-count {
     background: #10b981;
-    color: white;
+    color: var(--base-text-color);
     padding: 2px 8px;
     border-radius: 10px;
     font-size: 0.7rem;
@@ -116,14 +115,14 @@
 
 .user-actions {
     padding: 15px;
-    background: white;
+    background: var(--base-color);
     border-top: 1px solid #e5e7eb;
 }
 
 .logout-btn {
     width: 100%;
     background: linear-gradient(135deg, #dc2626, #ef4444);
-    color: white;
+    color: var(--base-text-color);
     border: none;
     padding: 12px;
     border-radius: 12px;
@@ -155,8 +154,9 @@ dialog {
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     padding: 0;
-    max-width: 400px;
+    max-width: 450px;
     width: 90%;
+    min-height: fit-content;
 
     position: fixed;
     top: 50%;
@@ -176,14 +176,58 @@ dialog::backdrop {
     overflow: hidden;
 
     /* background-color: #007bff; */
-    color: white;
+    color: var(--base-text-color);
     padding: 15px 20px;
     margin: 0;
     border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
 }
 
 .dialog-content {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.input-group label {
+    flex-shrink: 0;
+    height: 40px;
+    width: 100px;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.input-group input {
+    flex-grow: 1;
+    min-width: 0;
+    height: 40px;
+    padding: 0 12px;
+    font: inherit;
+    border: none;
+    background-color: var(--input-color);
+    transition: 150ms ease;
+    outline: none;
+}
+
+.input-group input:focus {
+    background-color: #fff;
+    box-shadow: inset 0 0 0 2px var(--accent-color);
 }
 
 .dialog-buttons {
@@ -203,8 +247,8 @@ dialog::backdrop {
 }
 
 .btn-ok {
-    background-color: #8672FF;
-    color: white;
+    background-color: var(--accent-color);
+    color: var(--base-text-color);
 }
 
 .btn-ok:hover {
@@ -213,7 +257,7 @@ dialog::backdrop {
 
 .btn-cancel {
     background-color: #6c757d;
-    color: white;
+    color: var(--base-text-color);
 }
 
 .btn-cancel:hover {
