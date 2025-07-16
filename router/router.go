@@ -48,7 +48,7 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 	r.POST("/api/logout", userHandler.Logout)
 
 	// API Room routes - TODO: move to the correct handler (no wsHandler)
-	r.GET(("/api/getRooms"), wsHandler.GetRooms)
+	r.GET("/api/room", wsHandler.GetRooms)
 
 	// WebSocket routes
 	r.POST("/ws/createRoom", wsHandler.CreateRoom)

@@ -57,7 +57,7 @@ const roomNameBuilder = (room) => {
 
 const fetchRooms = async () => {
     try {
-        const response = await fetch('/api/getRooms');
+        const response = await fetch('/api/room');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
