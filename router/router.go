@@ -4,13 +4,14 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jcasanella/golang_chat/internal/room"
 	"github.com/jcasanella/golang_chat/internal/user"
 	"github.com/jcasanella/golang_chat/internal/ws"
 )
 
 var r *gin.Engine
 
-func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
+func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler, roomHandler *room.Handler) {
 	r = gin.Default()
 
 	r.Static("/static", "./static")
@@ -47,8 +48,8 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler) {
 	r.POST("/api/login", userHandler.Login)
 	r.POST("/api/logout", userHandler.Logout)
 
-	// API Room routes - TODO: move to the correct handler (no wsHandler)
-	r.GET("/api/room", wsHandler.GetRooms)
+	// API Room routes
+	r.GET("/api/room", roomHandler.GetRooms)
 
 	// WebSocket routes
 	r.POST("/ws/createRoom", wsHandler.CreateRoom)

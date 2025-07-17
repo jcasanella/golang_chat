@@ -1,7 +1,6 @@
 package ws
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -81,36 +80,6 @@ func (h *Handler) JoinRoom(c *gin.Context) {
 	cl.readMessage(h.hub)
 }
 
-type RoomRes struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
-
-func (h *Handler) GetRooms(c *gin.Context) {
-	rooms := make([]RoomRes, 0)
-
-	for _, room := range h.hub.Rooms {
-		rooms = append(rooms, RoomRes{
-			ID:          room.ID,
-			Name:        room.Name,
-			Description: "Dummy description for " + room.Name, // TODO: Replace with actual description
-		})
-	}
-
-	// TODO: Remove this block when  CreateRoom is implemented - only use to print something from UI temporally
-	if len(rooms) == 0 {
-		for i := 0; i < 10; i++ {
-			rooms = append(rooms, RoomRes{
-				ID:          "default",
-				Name:        fmt.Sprintf("Default Room %d", i),
-				Description: fmt.Sprintf("This is the default room %d", i),
-			})
-		}
-	}
-
-	c.JSON(http.StatusOK, rooms)
-}
 
 type ClientRes struct {
 	ID       string `json:"id"`
