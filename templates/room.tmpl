@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat App - Rooms</title>
         <link rel="stylesheet" href="/static/css/room-style.css">
+        <link rel="stylesheet" href="/static/css/emoji-picker-style.css">
         <script type="module" src="/static/js/room-actions.js" defer></script>
+        <script type="module" src="/static/js/room-emoji-actions.js" defer></script>
     </head>
     <body>   
         <div class="wrapper-chat-room">   
@@ -69,12 +71,60 @@
         </div>
 
         <div class="wrapper-dialog">
-            <dialog id="dialog-create-room">
+            <div id="dialog-create-room" class="dialog-modal" style="display: none;">
                 <h3 class="dialog-header">Confirm Action</h3>
-                <form method="dialog" class="dialog-content">
+                <form class="dialog-content">
                     <div class="input-group">
                         <label for="room-name">Room Name</label>
                         <input id="room-name" name="room-name" type="text" required placeholder="Enter room name" />
+                    </div>
+
+                    <div class="input-group input-container">
+                        <label for="room-icon">Room Icon</label>
+                        <input id ="room-icon" class ="emoji-input" name="room-icon" type="text" readonly />
+                        <button type="button" class="emoji-trigger" id="emojiTrigger">😀</button>
+
+                        <div class="emoji-picker" id="emojiPicker">
+                            <input type="text" class="emoji-search" placeholder="Search emoji..." id="emojiSearch">
+                    
+                            <div class="emoji-tabs">
+                                <button class="emoji-tab active" data-category="smileys">😀</button>
+                                <button class="emoji-tab" data-category="people">👤</button>
+                                <button class="emoji-tab" data-category="animals">🐱</button>
+                                <button class="emoji-tab" data-category="food">🍎</button>
+                                <button class="emoji-tab" data-category="activities">⚽</button>
+                                <button class="emoji-tab" data-category="travel">🚗</button>
+                                <button class="emoji-tab" data-category="objects">💡</button>
+                                <button class="emoji-tab" data-category="symbols">❤️</button>
+                            </div>
+                    
+                            <div class="emoji-content">
+                                <div class="emoji-category active" data-category="smileys">
+                                    <div class="emoji-grid" id="smileys-grid"></div>
+                                </div>
+                                <div class="emoji-category" data-category="people">
+                                    <div class="emoji-grid" id="people-grid"></div>
+                                </div>
+                                <div class="emoji-category" data-category="animals">
+                                    <div class="emoji-grid" id="animals-grid"></div>
+                                </div>
+                                <div class="emoji-category" data-category="food">
+                                    <div class="emoji-grid" id="food-grid"></div>
+                                </div>
+                                <div class="emoji-category" data-category="activities">
+                                    <div class="emoji-grid" id="activities-grid"></div>
+                                </div>
+                                <div class="emoji-category" data-category="travel">
+                                    <div class="emoji-grid" id="travel-grid"></div>
+                                </div>
+                                <div class="emoji-category" data-category="objects">
+                                    <div class="emoji-grid" id="objects-grid"></div>
+                                </div>
+                                <div class="emoji-category" data-category="symbols">
+                                    <div class="emoji-grid" id="symbols-grid"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="input-group">
@@ -86,7 +136,7 @@
                     <button class="btn btn-cancel">Cancel</button>
                     <button class="btn btn-ok">OK</button>
                 </div>
-            </dialog>
+            </div>
         </div>
     </body>
 </html>
