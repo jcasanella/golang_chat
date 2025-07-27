@@ -201,16 +201,12 @@ class EmojiPicker {
     }
 
     insertEmoji(emoji) {
-        const cursorPosition = this.input.selectionStart;
-        const textBefore = this.input.value.substring(0, cursorPosition);
-        const textAfter = this.input.value.substring(cursorPosition);
-        
-        this.input.value = textBefore + emoji + textAfter;
+        // Replace the entire value with the selected emoji
+        this.input.value = emoji;
         this.input.focus();
-        this.input.setSelectionRange(cursorPosition + emoji.length, cursorPosition + emoji.length);
         
-        // Optional: close picker after selection
-        // this.closePicker();
+        // Close picker after selection since only one emoji is needed
+        this.closePicker();
     }
 }
 
