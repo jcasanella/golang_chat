@@ -23,7 +23,14 @@ type RoomRes struct {
 	Icon        string `json:"icon"`
 }
 
+// GetRooms handles the retrieval of all chat rooms
 func (h *Handler) GetRooms(c *gin.Context) {
+	_, err := c.Cookie("jwt")
+	if err != nil {
+		c.Redirect(http.StatusFound, "/")
+		return
+	}
+
 	rooms := make([]RoomRes, 0)
 
 	for _, room := range h.hub.Rooms {
@@ -45,6 +52,12 @@ type CreateRoomReq struct {
 
 // CreateRoom handles the creation of a new chat room
 func (h *Handler) CreateRoom(c *gin.Context) {
+	_, err := c.Cookie("jwt")
+	if err != nil {
+		c.Redirect(http.StatusFound, "/")
+		return
+	}
+
 	var req CreateRoomReq
 
 	if err := c.ShouldBindJSON(&req); err != nil {
