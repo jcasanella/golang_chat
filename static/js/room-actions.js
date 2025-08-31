@@ -1,3 +1,5 @@
+import { validateCreateRoomForm } from './validation.js';
+
 const logoutBtn = document.querySelector('.logout-btn');
 logoutBtn.addEventListener('click', async (event) => {
     window.location.href = '/logout';
@@ -21,6 +23,14 @@ roomCreationOkBtn.addEventListener("click", async (event) => {
     const roomNameInput = document.getElementById('room-name');
     const roomDescInput = document.getElementById('room-desc');
     const roomIconInput = document.getElementById('room-icon');
+    const errorMessageElement = document.getElementById('error-message');
+
+    // Run validation
+    const errors = validateCreateRoomForm(roomNameInput.value, roomDescInput.value);
+    if (errors.length > 0) {
+        errorMessageElement.innerHTML = errors.join('. ');
+        return;
+    }
 
     const apiEndpoint = '/api/createRoom';
     const fetchBody = {
@@ -38,16 +48,16 @@ roomCreationOkBtn.addEventListener("click", async (event) => {
     });
 
     if (!resp.ok) {
-        // const errorMessageElement = document.querySelector('#error-message');
-        // errorMessageElement.innerHTML = 'Error: ' + resp.statusText;
-        // errorMessageElement.classList.remove('hidden');
-        // errorMessageElement.classList.add('error-message');
+        const errorMessageElement = document.querySelector('#error-message');
+        errorMessageElement.innerHTML = 'Error: ' + resp.statusText;
+        errorMessageElement.classList.remove('hidden');
+        errorMessageElement.classList.add('error-message');
         console.error('Error creating room:', resp.statusText);
     } else {
         const data = await resp.json();
         console.log("Success:", data);
 
-        // window.location.href = '/room';
+        await fetchRooms();
     }
 });
 
