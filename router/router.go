@@ -50,9 +50,9 @@ func InitRouter(userHandler *user.Handler, wsHandler *ws.Handler, roomHandler *r
 
 	// API Room routes
 	r.GET("/api/rooms", roomHandler.GetRooms)
+	r.POST("/api/createRoom", roomHandler.CreateRoom)
 
 	// WebSocket routes
-	r.POST("/ws/createRoom", wsHandler.CreateRoom)
 	r.GET("/ws/joinRoom/:roomID", wsHandler.JoinRoom)
 	r.GET("/ws/getRoom/:roomId", wsHandler.GetClients)
 }

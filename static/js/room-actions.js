@@ -17,8 +17,38 @@ roomCreationOkBtn.addEventListener("click", async (event) => {
     event.preventDefault(); // Prevent default form submission
     const modal = document.getElementById('dialog-create-room');
     modal.style.display = 'none';
-    // Here you can add the logic to create a room, e.g., sending a request to the server
-    alert('Room creation confirmed!');
+
+    const roomNameInput = document.getElementById('room-name');
+    const roomDescInput = document.getElementById('room-desc');
+    const roomIconInput = document.getElementById('room-icon');
+
+    const apiEndpoint = '/api/createRoom';
+    const fetchBody = {
+        name: roomNameInput.value,
+        description: roomDescInput.value,
+        icon: roomIconInput.value
+    };
+
+    const resp = await fetch(apiEndpoint, {
+        method: 'POST',
+        body: JSON.stringify(fetchBody),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (!resp.ok) {
+        // const errorMessageElement = document.querySelector('#error-message');
+        // errorMessageElement.innerHTML = 'Error: ' + resp.statusText;
+        // errorMessageElement.classList.remove('hidden');
+        // errorMessageElement.classList.add('error-message');
+        console.error('Error creating room:', resp.statusText);
+    } else {
+        const data = await resp.json();
+        console.log("Success:", data);
+
+        // window.location.href = '/room';
+    }
 });
 
 const roomCreationCancelBtn = document.querySelector(".btn.btn-cancel");
@@ -61,7 +91,7 @@ const roomNameBuilder = (room) => {
     roomName.classList.add('room-name');
 
     // Add Room name
-    roomName.textContent = '🎮' + room.name;    // TODO - provide correct icon
+    roomName.textContent = room.icon + room.name;
     return roomName;
 }
 
