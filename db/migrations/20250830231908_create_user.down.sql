@@ -1,0 +1,1 @@
+DELETE FROM users WHERE username = 'admin' AND email = 'jordikiter@hotmail.es';

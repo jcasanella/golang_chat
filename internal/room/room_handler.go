@@ -1,7 +1,6 @@
 package room
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,32 +18,59 @@ func NewHandler(h *ws.Hub) *Handler {
 }
 
 type RoomRes struct {
-	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	Icon        string `json:"icon"`
 }
 
+// GetRooms handles the retrieval of all chat rooms
 func (h *Handler) GetRooms(c *gin.Context) {
+	_, err := c.Cookie("jwt")
+	if err != nil {
+		c.Redirect(http.StatusFound, "/")
+		return
+	}
+
 	rooms := make([]RoomRes, 0)
 
 	for _, room := range h.hub.Rooms {
 		rooms = append(rooms, RoomRes{
-			ID:          room.ID,
 			Name:        room.Name,
-			Description: "Dummy description for " + room.Name, // TODO: Replace with actual description
+			Description: room.Description,
+			Icon:        room.Icon,
 		})
 	}
 
-	// TODO: Remove this block when CreateRoom is implemented - only use to print something from UI temporally
-	if len(rooms) == 0 {
-		for i := 0; i < 10; i++ {
-			rooms = append(rooms, RoomRes{
-				ID:          "default",
-				Name:        fmt.Sprintf("Default Room %d", i),
-				Description: fmt.Sprintf("This is the default room %d", i),
-			})
-		}
+	c.JSON(http.StatusOK, rooms)
+}
+
+type CreateRoomReq struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Icon        string `json:"icon"`
+}
+
+// CreateRoom handles the creation of a new chat room
+func (h *Handler) CreateRoom(c *gin.Context) {
+	_, err := c.Cookie("jwt")
+	if err != nil {
+		c.Redirect(http.StatusFound, "/")
+		return
 	}
 
-	c.JSON(http.StatusOK, rooms)
+	var req CreateRoomReq
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	h.hub.Rooms[req.Name] = &ws.Room{
+		Name:        req.Name,
+		Description: req.Description,
+		Icon:        req.Icon,
+		Clients:     make(map[string]*ws.Client),
+	}
+
+	c.JSON(http.StatusOK, req)
 }

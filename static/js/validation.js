@@ -27,6 +27,20 @@ function validateEmail(email, inputElement) {
     return [true, undefined];
 }
 
+export function validateCreateRoomForm(roomName, roomDesc) {
+    const errors = [];
+
+    if (roomName.trim().length < 3) {
+        errors.push('Room name must be at least 3 characters long');
+    }   
+
+    if (roomDesc.trim().length > 0 && roomDesc.trim().length < 5) {
+        errors.push('Room description must be at least 5 characters long');
+    }  
+    
+    return errors;
+}
+
 export function validateLoginForm(username, password) {
     const errors = [];
 
